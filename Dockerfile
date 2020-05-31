@@ -25,4 +25,3 @@ RUN addgroup --system vpn && \
 
 CMD /usr/bin/start_vpn.sh
 COPY start_vpn.sh /usr/bin
-
