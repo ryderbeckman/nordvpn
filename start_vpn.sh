@@ -31,6 +31,7 @@ kill_switch() {
 	}
 	iptables -t nat -A POSTROUTING -o tap+ -j MASQUERADE
 	iptables -t nat -A POSTROUTING -o tun+ -j MASQUERADE
+	iptables -t nat -A POSTROUTING -o nordlynx -j MASQUERADE
 	if [[ -n ${DOCKER_NET} ]]; then
 		iptables -A INPUT -s ${DOCKER_NET} -j ACCEPT
 		iptables -A FORWARD -d ${DOCKER_NET} -j ACCEPT
