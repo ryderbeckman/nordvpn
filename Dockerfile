@@ -14,4 +14,4 @@ RUN apt-get update && apt-get upgrade -y && \
     apt install -y nordvpn && \
     apt remove -y wget nordvpn-release
 
-ENTRYPOINT["/usr/sbin/nordvpnd","&"]
+ENTRYPOINT ["/usr/sbin/nordvpnd","&"]
