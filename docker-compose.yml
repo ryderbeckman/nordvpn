@@ -1,0 +1,39 @@
+version: "3.5"
+services:
+  vpn:
+    image: techdoc404/nordvpn
+    cap_add:
+      - NET_ADMIN               # Required
+      - SYS_MODULE              # Required for TECHNOLOGY=NordLynx
+    sysctls:
+      - net.ipv4.conf.all.rp_filter=2
+    devices:
+      - /dev/net/tun            # Required
+    environment:                # Review https://github.com/bubuntux/nordvpn#environment-variables
+      - USER=user@email.com     # Required
+      - 'PASS=pas$word'         # Required
+      - CONNECT=United_States
+      - TECHNOLOGY=NordLynx
+    networks:
+      vpninternal:
+        ipv4_address: 172.16.69.2
+      vpnexternal:
+
+networks:
+  vpnexternal:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.68.0/24
+
+  vpninternal:
+    driver: overlay
+    attachable: true
+    name: vpninternal
+    internal: true
+    external: true
+    ipam:
+      config:
+        - subnet: 172.16.69.0/24
+
+  
